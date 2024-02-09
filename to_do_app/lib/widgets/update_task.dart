@@ -6,12 +6,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'custom_dropdown_form.dart';
 
 class UpdateTask extends StatefulWidget {
-  final String taskId, taskName, taskDesc, taskTag;
+  final String taskId, taskName, taskDec, taskTag;
   const UpdateTask(
       {Key? Key,
       required this.taskId,
       required this.taskName,
-      required this.taskDesc,
+      required this.taskDec,
       required this.taskTag})
       : super(key: Key);
 
@@ -28,7 +28,7 @@ class _UpdateTaskState extends State<UpdateTask> {
   @override
   Widget build(BuildContext context) {
     taskNameController.text = widget.taskName;
-    taskDescController.text = widget.taskDesc;
+    taskDescController.text = widget.taskDec;
 
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
@@ -172,12 +172,12 @@ class _UpdateTaskState extends State<UpdateTask> {
     );
   }
 
-  Future _updateTasks(String taskName, String taskDesc, String taskTag) async {
+  Future _updateTasks(String taskName, String taskDec, String taskTag) async {
     var collection = FirebaseFirestore.instance.collection('tasks');
     collection
         .doc(widget.taskId)
         .update(
-            {'taskName': taskName, 'taskDesc': taskDesc, 'taskTag': taskTag})
+            {'taskName': taskName, 'taskDec': taskDec, 'taskTag': taskTag})
         .then(
           (_) => Fluttertoast.showToast(
               msg: "Task updated successfully",

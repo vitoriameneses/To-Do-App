@@ -21,6 +21,8 @@ class _TasksState extends State<Tasks> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Text('No tasks to display');
+          } else if (snapshot.hasError) {
+            return Text('Erro: ${snapshot.error}');
           } else {
             return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -58,7 +60,7 @@ class _TasksState extends State<Tasks> {
                       ),
                     ),
                     title: Text(data['taskName']),
-                    subtitle: Text(data['taskDesc']),
+                    subtitle: Text(data['taskDec']),
                     isThreeLine: true,
                     trailing: PopupMenuButton(
                       itemBuilder: (context) {
@@ -72,7 +74,7 @@ class _TasksState extends State<Tasks> {
                             onTap: () {
                               String taskId = (data['id']);
                               String taskName = (data['taskName']);
-                              String taskDesc = (data['taskDesc']);
+                              String taskDec = (data['taskDec']);
                               String taskTag = (data['taskTag']);
                               Future.delayed(
                                 const Duration(seconds: 0),
@@ -81,7 +83,7 @@ class _TasksState extends State<Tasks> {
                                   builder: (context) => UpdateTask(
                                     taskId: taskId,
                                     taskName: taskName,
-                                    taskDesc: taskDesc,
+                                    taskDec: taskDec,
                                     taskTag: taskTag,
                                   ),
                                 ),
