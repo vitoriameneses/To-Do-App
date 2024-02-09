@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:to_do_app/firebase_options.dart';
 import 'package:to_do_app/telas/home.dart';
 import './telas/sign_in.dart';
+import './telas/sign_up.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 88, 51)),
         useMaterial3: true,
       ),
-      home: const SignInSignUp(),
+      home: const SignUp(),
     );
   }
 }
