@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Olá, $email!',
+                            'Olá, email!',
                             textAlign: TextAlign.start,
                             style: Theme.of(context)
                                 .textTheme

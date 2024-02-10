@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import '../widgets/custom_button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'sign_in.dart';
 //import 'package:flutter/gestures.dart';
 
@@ -18,7 +20,7 @@ class _SignupState extends State<SignUp> {
     // ignore: prefer_const_constructors
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.white,
       body: SafeArea(
         top: true,
         child: Padding(
@@ -309,29 +311,16 @@ class _SignupState extends State<SignUp> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(130, 0, 0, 0),
-                /* child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
-                    },
-                    text: 'Sign Up',
-                    options: FFButtonOptions(
-                      height: 40,
-                      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: Color(0xFF900C3F),
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Space Grotesk',
-                                color: Colors.white,
-                              ),
-                      elevation: 3,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),*/
+                child: CustomButton(
+                  onPressed: () {},
+                  text: 'Sign Up',
+                  textStyle: TextStyle(
+                    fontFamily: 'Space Grotesk',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ],
           ),
