@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
               var email = userDataMap['email'];
               // var email = userData!['email'];
               return Container(
+                //
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
@@ -150,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
+        toolbarHeight: 110,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -185,34 +187,38 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 6.0,
-        clipBehavior: Clip.antiAlias,
-        child: SizedBox(
-          height: kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom,
-          child: BottomNavigationBar(
-            currentIndex: selectedIndex,
-            selectedItemColor: Color.fromARGB(255, 88, 24, 69),
-            unselectedItemColor: Color.fromARGB(255, 144, 12, 63),
-            onTap: (index) {
-              setState(() {
-                selectedIndex = index;
-                pageController.jumpToPage(index);
-              });
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.square_list),
-                label: '',
+          shape: const CircularNotchedRectangle(),
+          //notchMargin: 6.0,
+          //clipBehavior: Clip.antiAlias,
+          child: Container(
+              height: kBottomNavigationBarHeight /*+ 6.*/,
+              padding: EdgeInsets.only(bottom: 0.0),
+              child: BottomNavigationBar(
+                elevation: 3,
+                currentIndex: selectedIndex,
+                selectedItemColor: Color.fromARGB(255, 88, 24, 69),
+                unselectedItemColor: Color.fromARGB(255, 144, 12, 63),
+                onTap: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                    pageController.jumpToPage(index);
+                  });
+                },
+                iconSize: 20,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(CupertinoIcons.square_list),
+                    label: 'Tasks',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(CupertinoIcons.tag),
+                    label: 'Categories',
+                  ),
+                ],
               ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.tag),
-                label: '',
-              ),
-            ],
-          ),
+            ),
+
         ),
-      ),
       body: PageView(
         controller: pageController,
         children: const <Widget>[

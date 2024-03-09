@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore
 
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
@@ -16,6 +16,7 @@ class SignUp extends StatefulWidget {
 class _SignupState extends State<SignUp> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
+  // ignore: duplicate_ignore
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
