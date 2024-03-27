@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
               .doc('ID_DO_USUARIO')
               .snapshots(),
           builder: (context, snapshot) {
-           if (snapshot.hasData) {
+            if (snapshot.hasData) {
               var userData = snapshot.data!.data();
               var userDataMap = userData as Map<String, dynamic>;
               var email = userDataMap['email'];
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             } else {
-             return Container();
+              return Container();
             }
           },
         ),
@@ -187,42 +187,40 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          //notchMargin: 6.0,
-          //clipBehavior: Clip.antiAlias,
-          child: Container(
-              height: kBottomNavigationBarHeight /*+ 6.*/,
-              padding: EdgeInsets.only(bottom: 0.0),
-              child: BottomNavigationBar(
-                elevation: 3,
-                currentIndex: selectedIndex,
-                selectedItemColor: Color.fromARGB(255, 88, 24, 69),
-                unselectedItemColor: Color.fromARGB(255, 144, 12, 63),
-                onTap: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                    pageController.jumpToPage(index);
-                  });
-                },
-                iconSize: 20,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.square_list),
-                    label: 'Tasks',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.tag),
-                    label: 'Categories',
-                  ),
-                ],
+        shape: const CircularNotchedRectangle(),
+        //notchMargin: 6.0,
+        //clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: kBottomNavigationBarHeight /*+ 6.*/,
+          padding: EdgeInsets.only(bottom: 0.0),
+          child: BottomNavigationBar(
+            elevation: 3,
+            currentIndex: selectedIndex,
+            selectedItemColor: Color.fromARGB(255, 88, 24, 69),
+            unselectedItemColor: Color.fromARGB(255, 144, 12, 63),
+            onTap: (index) {
+              setState(() {
+                selectedIndex = index;
+                pageController.jumpToPage(index);
+              });
+            },
+            iconSize: 20,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.square_list),
+                label: 'Tasks',
               ),
-            ),
-
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.tag),
+                label: 'Categories',
+              ),
+            ],
+          ),
         ),
+      ),
       body: PageView(
         controller: pageController,
         children: const <Widget>[
-
           Center(
             child: Tasks(),
           ),
@@ -233,4 +231,25 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+//função para aumentar/diminuir a quantidade de tasks por categoria
+Future<void> updateCategoryQuant() async {
+  CollectionReference categoriesRef =
+      FirebaseFirestore.instance.collection('category');
+  CollectionReference taskRef = FirebaseFirestore.instance.collection('task');
+  QuerySnapshot taskSnapshot = await taskRef.get();
+  int taskCount = taskSnapshot.docs.length;
+  // Atualizando o campo "quant" de cada documento na coleção "category"
+  QuerySnapshot categorySnapshot = await categoriesRef.get();
+  categorySnapshot.docs.forEach((categoryDoc) async {
+    // Obtendo o valor atual do campo "quant"
+    int currentQuant = categoryDoc.data()['quant'] ?? 0;
+
+    // Novo valor para o campo "quant" (aumenta ou diminui com base na quantidade de tarefas)
+    int newQuant = currentQuant + taskCount;
+
+    // Atualizando o documento na coleção "category" com o novo valor de "quant"
+    await categoriesRef.doc(categoryDoc.id).update({'quant': newQuant});
+  });
 }
