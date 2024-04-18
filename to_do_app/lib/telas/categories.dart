@@ -58,7 +58,8 @@ class _CategoriesState extends State<Categories> {
                       ),
                     ),
                     title: Text(data['name']),
-                    subtitle: Text(data['quant']),
+                    subtitle: Text(data['quant'].toString()),
+                    //subtitle: Text(data['quant']),
                     isThreeLine: true,
                   ),
                 );
@@ -68,8 +69,5 @@ class _CategoriesState extends State<Categories> {
         },
       ),
     );
-    /*const Center(
-      child: Text('Categories text'),
-    );*/
   }
 }

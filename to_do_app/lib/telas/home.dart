@@ -28,16 +28,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: StreamBuilder<DocumentSnapshot>(
           stream: FirebaseFirestore.instance
               .collection('users')
-              .doc('ID_DO_USUARIO')
+              .doc('BqqXwj7eIvqaSmqp4DSZ')
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var userData = snapshot.data!.data();
               var userDataMap = userData as Map<String, dynamic>;
               var email = userDataMap['email'];
+              var name = userDataMap['name'];
+              var password = userDataMap['password'];
               // var email = userData!['email'];
               return Container(
-                //
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
@@ -47,13 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   //icon
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 30, 0, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Olá, email!',
+                            'Olá, $name!',
                             textAlign: TextAlign.start,
                             style: Theme.of(context)
                                 .textTheme
@@ -93,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             Icon(
                               Icons.account_box_outlined,
+                              color: Color.fromARGB(255, 88, 24, 69),
                               //color: FlutterFlowTheme.of(context).secondaryText,
                               size: 30,
                             ),
@@ -103,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   .bodyMedium!
                                   .copyWith(
                                     fontFamily: 'Space Grotesk',
+                                    color: Color.fromARGB(255, 88, 24, 69),
                                     //color: FlutterFlowTheme.of(context).primaryBackground,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -118,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Icon(
                             Icons.logout,
+                            color: Color.fromARGB(255, 88, 24, 69),
                             // color: FlutterFlowTheme.of(context).secondaryText,
                             size: 30,
                           ),
@@ -131,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   .bodyMedium!
                                   .copyWith(
                                     fontFamily: 'Space Grotesk',
+                                    color: Color.fromARGB(255, 88, 24, 69),
                                     //color: FlutterFlowTheme.of(context).primaryBackground,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -232,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
+/*
 //função para aumentar/diminuir a quantidade de tasks por categoria
 Future<void> updateCategoryQuant() async {
   CollectionReference categoriesRef =
@@ -244,7 +249,7 @@ Future<void> updateCategoryQuant() async {
   QuerySnapshot categorySnapshot = await categoriesRef.get();
   categorySnapshot.docs.forEach((categoryDoc) async {
     // Obtendo o valor atual do campo "quant"
-    int currentQuant = categoryDoc.data()['quant'] ?? 0;
+   int currentQuant = categoryDoc.data()['quant'] ?? 0;
 
     // Novo valor para o campo "quant" (aumenta ou diminui com base na quantidade de tarefas)
     int newQuant = currentQuant + taskCount;
@@ -253,3 +258,4 @@ Future<void> updateCategoryQuant() async {
     await categoriesRef.doc(categoryDoc.id).update({'quant': newQuant});
   });
 }
+*/
